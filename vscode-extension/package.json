@@ -1,0 +1,89 @@
+{
+  "name": "autotester",
+  "displayName": "Autotester: docstring examples",
+  "description": "Runs the 'Example execution N' transcripts in a program's docstring or header comment and shows every mismatch inline, with a diagnosis of what kind of mistake it is. Python, C, C++, Java, JavaScript, Rust and Ruby.",
+  "version": "0.3.0",
+  "publisher": "autotester-local",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Testing"
+  ],
+  "keywords": [
+    "python",
+    "c",
+    "java",
+    "docstring",
+    "examples",
+    "autograder"
+  ],
+  "activationEvents": [
+    "onLanguage:python",
+    "onLanguage:c",
+    "onLanguage:cpp",
+    "onLanguage:java",
+    "onLanguage:javascript",
+    "onLanguage:rust",
+    "onLanguage:ruby",
+    "workspaceContains:**/autotester.json"
+  ],
+  "main": "./extension.js",
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": false,
+      "description": "Autotester runs the Python programs it tests."
+    }
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "autotester.testFile",
+        "title": "Autotester: Test Current File",
+        "icon": "$(beaker)"
+      },
+      {
+        "command": "autotester.testWorkspace",
+        "title": "Autotester: Test Every File in the Workspace"
+      }
+    ],
+    "menus": {
+      "editor/title/run": [
+        {
+          "command": "autotester.testFile",
+          "when": "resourceLangId =~ /^(python|c|cpp|java|javascript|rust|ruby)$/",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Autotester",
+      "properties": {
+        "autotester.script": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Path to `autotester.py`. Empty: the copy bundled with the extension, else `autotester.py` in the workspace folder."
+        },
+        "autotester.python": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Interpreter used to run `autotester.py` itself and any Python programs. Empty: the interpreter selected in the Python extension, else `python3`."
+        },
+        "autotester.args": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "markdownDescription": "Extra flags passed to `autotester.py`, e.g. `[\"--strict\"]` or `[\"-t\", \"10\"]`."
+        },
+        "autotester.inputMarker": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Regex marking typed input in an example line. Empty: an arrow such as `-> `. Transcripts in the `Prompt: value` style want `: `. An `autotester.json` next to the program wins over this."
+        }
+      }
+    }
+  }
+}

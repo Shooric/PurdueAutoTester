@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Built VS Code extension: rebuild it with
+#   python3 vscode-extension/build_vsix.py --install
+*.vsix
+
+# Compiler output from running the samples
+a.out
+*.o
+*.obj
+*.class
+*.exe
+*.dSYM/
+
+# Editor and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
