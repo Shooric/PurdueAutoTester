@@ -1,4 +1,4 @@
-# PurdueAtuoTester
+# PurdueAutoTester
 
 Test a console program against the example runs written in its own comments.
 
